@@ -1,3 +1,45 @@
+
+Crafty.transition = function(scene, t_in, t_out, duration, color){
+    var opts = {duration: duration || 50, color: color || '#000000', t_in: true, t_out: false};
+
+    Crafty.e("2D, Canvas, Tween, Color")
+        .attr({alpha:0.0, x:0, y:0, w:Game.width(), h:Game.height()})
+        .color(opts.color)
+        .tween({alpha: 1.0}, (opts.t_out ? opts.duration : 1))
+        .bind("TweenEnd", function() {
+            Crafty.scene(scene);
+            if (opts.t_in)
+            {
+                Crafty.e("2D, Canvas, Tween, Color")
+                    .attr({alpha:1.0, x:0, y:0, w:Game.width(), h:Game.height()})
+                    .color(opts.color)
+                    .tween({alpha: 0.0}, opts.duration);
+            }
+        });
+};
+
+Crafty.scene('House', function() {
+
+    Crafty.e('House');
+
+    // Play a ringing sound to indicate the start of the journey
+    Crafty.audio.play('ring');
+
+    $('#build-kitchen').click(function(){
+        Crafty.e('Kitchen');
+    });
+
+    $('#build-workshop').click(function(){
+        Crafty.e('Workshop');
+    });
+
+    $('#build-lab').click(function(){
+        Crafty.e('Lab');
+    });
+
+
+});
+
 Crafty.scene('Game', function() {
 
     // Player character, placed at 5, 5 on our grid
@@ -61,7 +103,7 @@ Crafty.scene('Victory', function() {
     setTimeout(function() { delay = false; }, 5000);
     this.restart_game = function() {
         if (!delay) {
-            Crafty.scene('Game');
+            Crafty.transition('House');
         }
     };
 
@@ -86,6 +128,8 @@ Crafty.scene('Loading', function(){
     Crafty.load([
         'assets/16x16_forest_2.gif',
         'assets/hunter.png',
+        'assets/house.jpg',
+        'assets/house-over.jpg',
         'assets/door_knock_3x.mp3',
         'assets/door_knock_3x.ogg',
         'assets/door_knock_3x.aac',
@@ -115,6 +159,14 @@ Crafty.scene('Loading', function(){
             spr_player:  [0, 2],
         }, 0, 2);
 
+        Crafty.sprite(768, 512, 'assets/house.jpg', {
+            spr_house:  [0, 0],
+        });
+
+        Crafty.sprite(768, 512, 'assets/house-over.jpg', {
+            spr_house_over:  [0, 0],
+        });
+
         // Define our sounds for later use
         Crafty.audio.add({
             knock:     ['assets/door_knock_3x.mp3',
@@ -129,6 +181,6 @@ Crafty.scene('Loading', function(){
         });
 
         // Now that our sprites are ready to draw, start the game
-        Crafty.scene('Game');
-    })
+        Crafty.transition('House');
+    });
 });
