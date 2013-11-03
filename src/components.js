@@ -127,3 +127,70 @@ Crafty.c('Village', {
         Crafty.trigger('VillageVisited', this);
     }
 });
+
+//House Scene Components
+
+Crafty.c('House', {
+    init: function() {
+        this.requires('Mouse, 2D, Canvas, spr_house')
+        .attr({x:0, y:0})
+        //todo: place house graphics on one sprite sheet for efficient swapping
+        .bind('MouseOver', function(e){
+            this.removeComponent('spr_house')
+                .addComponent('spr_house_over');
+        })
+        .bind('MouseOut', function(e){
+            this.removeComponent('spr_house_over')
+                .addComponent('spr_house');
+        })
+        ;
+    },
+});
+
+Crafty.c('Workshop', {
+    init: function() {
+        this.requires('Mouse, 2D, Canvas, Color')
+            .attr({x:50,y:50, w:100, h:100})
+            .color('rgb(20, 185, 40)')
+            .bind('MouseOver', function(e){
+                this.color('rgb(40, 205, 60)');
+            })
+            .bind('MouseOut', function(e){
+                this.color('rgb(20, 185, 40)');
+            })
+            .bind('Click', function(e){
+                Crafty.scene('Game');
+            })
+        ;
+    },
+});
+
+Crafty.c('Kitchen', {
+    init: function() {
+        this.requires('Mouse, 2D, Canvas, Color')
+            .attr({x:50,y:200, w:100, h:100})
+            .color('rgb(185, 20, 40)')
+            .bind('MouseOver', function(e){
+                this.color('rgb(205, 40, 60)');
+            })
+            .bind('MouseOut', function(e){
+                this.color('rgb(185, 20, 40)');
+            })
+        ;
+    },
+});
+
+Crafty.c('Lab', {
+    init: function() {
+        this.requires('Mouse, 2D, Canvas, Color')
+            .attr({x:50,y:350, w:100, h:100})
+            .color('rgb(20, 40, 185)')
+            .bind('MouseOver', function(e){
+                this.color('rgb(40, 60, 205)');
+            })
+            .bind('MouseOut', function(e){
+                this.color('rgb(20, 40, 185)');
+            })
+        ;
+    },
+});
