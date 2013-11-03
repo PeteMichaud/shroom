@@ -26,6 +26,8 @@ task :make do
     prefix, basename = assets.pathname.to_s.split('/')[-2..-1]
     FileUtils.mkpath BUILD_DIR.join(prefix)
 
+    basename = "#{File.basename(basename)}.css" if File.extname(basename) == '.scss'
+
     assets.write_to(BUILD_DIR.join(prefix, basename))
     #assets.to_a.each do |asset|
     #  # strip filename.css.foo.bar.css multiple extensions
