@@ -4,8 +4,8 @@ Game = {
         width:  24,
         height: 16,
         tile: {
-            width:  16,
-            height: 16
+            width:  32,
+            height: 32
         }
     },
 
@@ -30,5 +30,6 @@ Game = {
         Crafty.scene('Loading');
     }
 }
+
 
 $text_css = { 'font-size': '24px', 'font-family': 'Arial', 'color': 'white', 'text-align': 'center' }
