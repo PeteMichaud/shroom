@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="lib/jquery.js"></script>
     <script src="lib/crafty.js"></script>
     <script src="src/game.js"></script>
     <script src="src/components.js"></script>
@@ -20,7 +21,10 @@
             color: #BBB;
         }
 
-        #cr-stage { margin: 20px auto 0; }
+        #cr-stage {
+            margin: 20px auto 0;
+            float: left;
+        }
 
         .bottom {
             font-size: 12px;
@@ -31,8 +35,24 @@
         .bottom a {
             color: #AAA;
         }
+
+        #ui {
+            width:200px;
+            float:right;
+        }
     </style>
 </head>
 <body>
+
+<div id="cr-stage"></div>
+
+<div id="ui">
+    <ul>
+        <li><a href="#" id="build-kitchen">Build Kitchen</a></li>
+        <li><a href="#" id="build-workshop">Build Workshop</a></li>
+        <li><a href="#" id="build-lab">Build Lab</a></li>
+    </ul>
+</div>
+
 </body>
 </html>
