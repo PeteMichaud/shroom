@@ -5,3 +5,4 @@
 //= require ./rock
 //= require ./player
 //= require ./village
+//= require ./background
