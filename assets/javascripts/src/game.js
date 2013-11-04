@@ -25,10 +25,36 @@ Game = {
     start: function() {
         // Start crafty and set a background color so that we can see it's working
         Crafty.init(Game.width(), Game.height());
-        Crafty.background('rgb(87, 109, 20)');
+        Crafty.background('rgb(0, 0, 0)');
 
         Crafty.scene('Loading');
     }
+};
+
+Crafty.transition = function(scene, args){
+
+    var default_opts = {
+        duration: 50,
+        color: '#000000',
+        t_in: true,
+        t_out: false};
+
+    var opts = $.extend({}, default_opts, args);
+
+    Crafty.e("2D, Canvas, Tween, Color")
+        .attr({alpha:0.0, x:0, y:0, w:Game.width(), h:Game.height()})
+        .color(opts.color)
+        .tween({alpha: 1.0}, (opts.t_out ? opts.duration : 1))
+        .bind("TweenEnd", function() {
+            Crafty.scene(scene);
+            if (opts.t_in)
+            {
+                Crafty.e("2D, Canvas, Tween, Color")
+                    .attr({alpha:1.0, x:0, y:0, w:Game.width(), h:Game.height()})
+                    .color(opts.color)
+                    .tween({alpha: 0.0}, opts.duration);
+            }
+        });
 };
 
 $text_css = { 'font-size': '24px', 'font-family': 'Arial', 'color': 'white', 'text-align': 'center' }
