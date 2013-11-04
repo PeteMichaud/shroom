@@ -1,6 +1,6 @@
 Crafty.c('Lab', {
     init: function() {
-        this.requires('Mouse, 2D, Canvas, Color')
+        this.requires('Building, Color')
             .attr({x:50,y:350, w:100, h:100})
             .color('rgb(20, 40, 185)')
             .bind('MouseOver', function(e){

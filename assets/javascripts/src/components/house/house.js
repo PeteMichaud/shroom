@@ -2,7 +2,7 @@
 
 Crafty.c('House', {
     init: function() {
-        this.requires('Mouse, 2D, Canvas, spr_house')
+        this.requires('Building, spr_house')
             .attr({x:0, y:0})
             //todo: place house graphics on one sprite sheet for efficient swapping
             .bind('MouseOver', function(e){
